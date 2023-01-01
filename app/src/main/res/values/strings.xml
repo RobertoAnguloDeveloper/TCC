@@ -25,6 +25,7 @@
     <string name="headerNombres">NOMBRES</string>
     <string name="headerApellidos">APELLIDOS</string>
     <string name="headerNumId"># Identificación</string>
+    <string name="btnEditar">Editar</string>
 
     <!-- activity-llamar -->
     <string name="btnLlamar">Llamar</string>

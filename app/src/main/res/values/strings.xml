@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">Contacto</string>
+    <string name="cipa_name">RVLR SOFT</string>
+    <string name="cipa_info">ROBERTO ANGULO VINCENT ROLONG LUIFER VILLA RUBEN HERNANDEZ MURIEL DIAZ</string>
+    <string name="udc_logo">UDC Logo</string>
+    <string name="appTitle">APP DE CONTACTO</string>
+    <string name="menuItem1">Agregar Contacto</string>
+    <string name="menuItem2">Lista de Contactos</string>
+    <string name="menuItem3">Actualizar Contacto</string>
+    <string name="menuItem4">Eliminar Contacto</string>
+    <string name="Salir">Salir</string>
+
+    <!-- activity_agregar -->
+    <string name="agregarTitle">AGREGAR CONTACTO</string>
+    <string name="id">ID</string>
+    <string name="nombres">Nombres</string>
+    <string name="apellidos">Apellidos</string>
+    <string name="tel_contacto">Teléfono de contacto</string>
+    <string name="email">Correo electrónico</string>
+    <string name="domicilio">Dirección de residencia</string>
+    <string name="btnAgregar">Agregar</string>
+
+    <!-- activity-mostrar -->
+    <string name="mostrarTitle">LISTA DE CONTACTOS</string>
+    <string name="headerNombres">NOMBRES</string>
+    <string name="headerApellidos">APELLIDOS</string>
+    <string name="headerNumId"># Identificación</string>
+
+    <!-- activity-llamar -->
+    <string name="btnLlamar">Llamar</string>
+
+    <!-- activity-actualizar -->
+    <string name="btnActualizar">Actualizar</string>
+
+    <!-- activity-eliminar -->
+    <string name="btnEliminar">Eliminar</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

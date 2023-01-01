@@ -1,22 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="40dp"
-    tools:context=".view.LlamarActivity">
+    android:layout_height="match_parent"
+    tools:context=".view.fragments.AgregarFragment">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="40dp">
+
+            <TextView
+                android:id="@+id/agregarTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textStyle="bold"
+                android:textSize="10pt"
+                android:fontFamily="sans-serif-black"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:text="@string/agregarTitle" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -24,7 +34,7 @@
                 android:layout_gravity="center_horizontal">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/idContact"
+                    android:id="@+id/id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/id" />
@@ -37,12 +47,11 @@
                 android:layout_marginTop="10dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/nombresContact"
+                    android:id="@+id/nombres"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/nombres" />
             </com.google.android.material.textfield.TextInputLayout>
-
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -50,12 +59,11 @@
                 android:layout_marginTop="10dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/apellidosContact"
+                    android:id="@+id/apellidos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/apellidos" />
             </com.google.android.material.textfield.TextInputLayout>
-
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -63,13 +71,12 @@
                 android:layout_marginTop="10dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/telefonoContact"
+                    android:id="@+id/telefono"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
                     android:hint="@string/tel_contacto" />
             </com.google.android.material.textfield.TextInputLayout>
-
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -77,13 +84,12 @@
                 android:layout_marginTop="10dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/emailContact"
+                    android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
                     android:hint="@string/email" />
             </com.google.android.material.textfield.TextInputLayout>
-
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -91,22 +97,21 @@
                 android:layout_marginTop="10dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/domicilioContact"
+                    android:id="@+id/domicilio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/domicilio" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/btnLlamar"
+                android:id="@+id/btnAgregar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/btnAgregar"
                 android:layout_marginTop="10dp"
-                android:layout_gravity="center"
-                android:text="@string/btnLlamar"
-                android:textStyle="bold" />
+                android:layout_gravity="center_horizontal"/>
         </LinearLayout>
 
-    </ScrollView>
 
-</LinearLayout>
+    </ScrollView>
+</FrameLayout>

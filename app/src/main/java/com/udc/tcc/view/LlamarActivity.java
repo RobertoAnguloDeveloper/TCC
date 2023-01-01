@@ -1,8 +1,9 @@
-package com.udc.tcc;
+package com.udc.tcc.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,25 +11,26 @@ import android.view.View;
 import android.widget.Button;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.udc.tcc.R;
 import com.udc.tcc.controller.ManejadorInputs;
 import com.udc.tcc.model.Persona;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EliminarActivity extends AppCompatActivity {
+public class LlamarActivity extends AppCompatActivity {
     Intent agregarActivityIntent, mostrarActivityIntent, mostrarActualizarActivityIntent
             , mostrarEliminarActivityIntent;
-    private TextInputEditText idContact, nombresContact, apellidosContact, telefonoContact, emailContact, domicilioContact;
-    private List<TextInputEditText> textInputEditTextList;
-    private Button btnEliminar;
+    TextInputEditText idContact, nombresContact, apellidosContact, telefonoContact, emailContact, domicilioContact;
+    List<TextInputEditText> textInputEditTextList;
+    Button btnLlamar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_eliminar);
+        setContentView(R.layout.activity_llamar);
+        getSupportActionBar().setTitle("LLAMAR A CONTACTO");
 
-        agregarActivityIntent = new Intent(this, AgregarActivity.class);
         mostrarActivityIntent = new Intent(this, MostrarListaActivity.class);
         mostrarActualizarActivityIntent = new Intent(this, MostrarActualizarActivity.class);
         mostrarEliminarActivityIntent = new Intent(this, MostrarEliminarActivity.class);
@@ -38,24 +40,24 @@ public class EliminarActivity extends AppCompatActivity {
         idContact = findViewById(R.id.idContact);
         textInputEditTextList.add(idContact);
 
-        nombresContact = findViewById(R.id.nombresContactE);
+        nombresContact = findViewById(R.id.nombresContact);
         textInputEditTextList.add(nombresContact);
 
-        apellidosContact = findViewById(R.id.apellidosContactE);
+        apellidosContact = findViewById(R.id.apellidosContact);
         textInputEditTextList.add(apellidosContact);
 
-        telefonoContact = findViewById(R.id.telefonoContactE);
+        telefonoContact = findViewById(R.id.telefonoContact);
         textInputEditTextList.add(telefonoContact);
 
-        emailContact = findViewById(R.id.emailContactE);
+        emailContact = findViewById(R.id.emailContact);
         textInputEditTextList.add(emailContact);
 
-        domicilioContact =findViewById(R.id.domicilioContactE);
+        domicilioContact =findViewById(R.id.domicilioContact);
         textInputEditTextList.add(domicilioContact);
 
-        Persona contacto = MostrarEliminarActivity.personaEliminar;
+        Persona contacto = MostrarListaActivity.personaClicked;
 
-        btnEliminar = findViewById(R.id.btnEliminar);
+        btnLlamar = findViewById(R.id.btnLlamar);
 
         idContact.setText(contacto.getId().toString());
         nombresContact.setText(contacto.getNombres());
@@ -66,23 +68,10 @@ public class EliminarActivity extends AppCompatActivity {
 
         ManejadorInputs.disable(textInputEditTextList);
 
-        btnEliminar.setOnClickListener(new View.OnClickListener() {
+        btnLlamar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                int index = 0;
-                int idBuscar = Integer.valueOf(idContact.getText().toString());
-                for (int i = 0; i < MainActivity.contactos.size(); i++) {
-                    if(MainActivity.contactos.get(i).getId() == idBuscar){
-                        index = i;
-                        break;
-                    }
-                }
-
-                MainActivity.contactos.remove(index);
-                MostrarEliminarActivity.adapterEliminar.notifyDataSetChanged();
-                finish();
-                startActivity(mostrarEliminarActivityIntent);
+                startActivity(new Intent(Intent.ACTION_DIAL).setData(Uri.parse("tel:" + contacto.getTelefono())));
             }
         });
     }

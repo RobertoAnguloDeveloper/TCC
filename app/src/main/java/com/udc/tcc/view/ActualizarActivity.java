@@ -1,9 +1,8 @@
-package com.udc.tcc;
+package com.udc.tcc.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,26 +10,27 @@ import android.view.View;
 import android.widget.Button;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.udc.tcc.MainActivity;
+import com.udc.tcc.R;
 import com.udc.tcc.controller.ManejadorInputs;
 import com.udc.tcc.model.Persona;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LlamarActivity extends AppCompatActivity {
+public class ActualizarActivity extends AppCompatActivity {
     Intent agregarActivityIntent, mostrarActivityIntent, mostrarActualizarActivityIntent
             , mostrarEliminarActivityIntent;
-    TextInputEditText idContact, nombresContact, apellidosContact, telefonoContact, emailContact, domicilioContact;
-    List<TextInputEditText> textInputEditTextList;
-    Button btnLlamar;
+    private TextInputEditText idContact, nombresContact, apellidosContact, telefonoContact, emailContact, domicilioContact;
+    private List<TextInputEditText> textInputEditTextList;
+    private Button btnActualizar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_llamar);
-        getSupportActionBar().setTitle("LLAMAR A CONTACTO");
+        setContentView(R.layout.activity_actualizar);
+        getSupportActionBar().setTitle("ACTUALIZAR CONTACTO");
 
-        agregarActivityIntent = new Intent(this, AgregarActivity.class);
         mostrarActivityIntent = new Intent(this, MostrarListaActivity.class);
         mostrarActualizarActivityIntent = new Intent(this, MostrarActualizarActivity.class);
         mostrarEliminarActivityIntent = new Intent(this, MostrarEliminarActivity.class);
@@ -40,24 +40,19 @@ public class LlamarActivity extends AppCompatActivity {
         idContact = findViewById(R.id.idContact);
         textInputEditTextList.add(idContact);
 
-        nombresContact = findViewById(R.id.nombresContact);
-        textInputEditTextList.add(nombresContact);
+        nombresContact = findViewById(R.id.nombresContactA);
 
-        apellidosContact = findViewById(R.id.apellidosContact);
-        textInputEditTextList.add(apellidosContact);
+        apellidosContact = findViewById(R.id.apellidosContactA);
 
-        telefonoContact = findViewById(R.id.telefonoContact);
-        textInputEditTextList.add(telefonoContact);
+        telefonoContact = findViewById(R.id.telefonoContactA);
 
-        emailContact = findViewById(R.id.emailContact);
-        textInputEditTextList.add(emailContact);
+        emailContact = findViewById(R.id.emailContactA);
 
-        domicilioContact =findViewById(R.id.domicilioContact);
-        textInputEditTextList.add(domicilioContact);
+        domicilioContact =findViewById(R.id.domicilioContactA);
 
-        Persona contacto = MostrarListaActivity.personaClicked;
+        Persona contacto = MostrarActualizarActivity.personaActualizar;
 
-        btnLlamar = findViewById(R.id.btnLlamar);
+        btnActualizar = findViewById(R.id.btnActualizar);
 
         idContact.setText(contacto.getId().toString());
         nombresContact.setText(contacto.getNombres());
@@ -68,10 +63,29 @@ public class LlamarActivity extends AppCompatActivity {
 
         ManejadorInputs.disable(textInputEditTextList);
 
-        btnLlamar.setOnClickListener(new View.OnClickListener() {
+        btnActualizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Intent.ACTION_DIAL).setData(Uri.parse("tel:" + contacto.getTelefono())));
+                Persona contactoEditado = new Persona(Integer.valueOf(idContact.getText().toString())
+                        , nombresContact.getText().toString(), apellidosContact.getText().toString()
+                        , telefonoContact.getText().toString(), emailContact.getText().toString()
+                        ,domicilioContact.getText().toString());
+
+                int index = 0;
+                int idBuscar = Integer.valueOf(idContact.getText().toString());
+                for (int i = 0; i < MainActivity.contactos.size(); i++) {
+                    if(MainActivity.contactos.get(i).getId() == idBuscar){
+                        index = i;
+                        break;
+                    }
+                }
+
+                contactoEditado.setImagen(MainActivity.contactos.get(index).getImagen());
+
+                MainActivity.contactos.set(index, contactoEditado);
+                MostrarActualizarActivity.adapterActualizar.notifyDataSetChanged();
+                finish();
+                startActivity(mostrarActualizarActivityIntent);
             }
         });
     }

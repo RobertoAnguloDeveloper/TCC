@@ -1,4 +1,4 @@
-package com.udc.tcc;
+package com.udc.tcc.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.udc.tcc.MainActivity;
+import com.udc.tcc.R;
 import com.udc.tcc.controller.CustomAdapter;
 import com.udc.tcc.model.Persona;
 
@@ -29,7 +31,6 @@ public class MostrarActualizarActivity extends AppCompatActivity {
 
         listViewActualizar = findViewById(R.id.listaContactosActualizar);
         actualizarActivityIntent = new Intent(this, ActualizarActivity.class);
-        agregarActivityIntent = new Intent(this, AgregarActivity.class);
         mostrarActivityIntent = new Intent(this, MostrarListaActivity.class);
         mostrarActualizarActivityIntent = new Intent(this, MostrarActualizarActivity.class);
         mostrarEliminarActivityIntent = new Intent(this, MostrarEliminarActivity.class);

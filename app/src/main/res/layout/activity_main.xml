@@ -8,22 +8,10 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/appTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-black"
-        android:layout_gravity="center"
-        android:text="@string/appTitle"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textStyle="bold"
-        android:layout_marginTop="50pt"
-        android:layout_marginBottom="20pt"/>
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="100pt"
-        android:layout_height="100pt"
-        android:layout_gravity="center"
-        app:srcCompat="@drawable/contact_book" />
+    <FrameLayout
+        android:id="@+id/fragmentFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    </FrameLayout>
 </LinearLayout>

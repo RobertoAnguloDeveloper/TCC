@@ -1,10 +1,13 @@
-package com.udc.tcc;
+package com.udc.tcc.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import com.udc.tcc.MainActivity;
+import com.udc.tcc.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
 

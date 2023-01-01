@@ -1,4 +1,4 @@
-package com.udc.tcc;
+package com.udc.tcc.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,38 +10,39 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.udc.tcc.MainActivity;
+import com.udc.tcc.R;
 import com.udc.tcc.controller.CustomAdapter;
 import com.udc.tcc.model.Persona;
 
-public class MostrarEliminarActivity extends AppCompatActivity {
+public class MostrarListaActivity extends AppCompatActivity {
     Intent agregarActivityIntent, mostrarActivityIntent, mostrarActualizarActivityIntent
             , mostrarEliminarActivityIntent;
-    public static ListView listViewEliminar;
-    public static CustomAdapter adapterEliminar;
-    private Intent eliminarActivityIntent;
-    public static Persona personaEliminar;
+    public static ListView listView;
+    public static CustomAdapter adapter;
+    private Intent llamarActivityIntent;
+    public static Persona personaClicked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mostrar_eliminar);
-        getSupportActionBar().setTitle("ELIMINAR CONTACTO");
+        setContentView(R.layout.activity_mostrar_lista);
+        getSupportActionBar().setTitle("LISTA DE CONTACTOS");
 
-        listViewEliminar = findViewById(R.id.listaContactosEliminar);
-        eliminarActivityIntent = new Intent(this, EliminarActivity.class);
-        agregarActivityIntent = new Intent(this, AgregarActivity.class);
+        listView = findViewById(R.id.listaContactos);
+        llamarActivityIntent = new Intent(this, LlamarActivity.class);
         mostrarActivityIntent = new Intent(this, MostrarListaActivity.class);
         mostrarActualizarActivityIntent = new Intent(this, MostrarActualizarActivity.class);
         mostrarEliminarActivityIntent = new Intent(this, MostrarEliminarActivity.class);
 
-        adapterEliminar = new CustomAdapter(this);
-        listViewEliminar.setAdapter(adapterEliminar);
+        adapter = new CustomAdapter(this);
+        listView.setAdapter(adapter);
 
-        listViewEliminar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                personaEliminar = MainActivity.contactos.get(i);
-                startActivity(eliminarActivityIntent);
+                personaClicked = MainActivity.contactos.get(i);
+                startActivity(llamarActivityIntent);
             }
         });
     }

@@ -23,7 +23,7 @@ import com.udc.tcc.controller.CustomAdapter;
 public class ContactosFragment extends Fragment {
     public static ListView listView;
     public static CustomAdapter adapter;
-    private View view;
+    public static View view;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

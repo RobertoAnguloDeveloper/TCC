@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -16,6 +17,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.material.textfield.TextInputEditText;
 import com.udc.tcc.MainActivity;
 import com.udc.tcc.R;
+import com.udc.tcc.controller.CustomAdapter;
 import com.udc.tcc.controller.ManejadorInputs;
 import com.udc.tcc.model.Persona;
 
@@ -23,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -140,15 +143,15 @@ public class AgregarFragment extends Fragment {
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                JSONObject p_json = new JSONObject();
 
                 Persona persona = new Persona(Integer.valueOf(id.getText().toString()), nombres.getText().toString(),
                         apellidos.getText().toString(), telefono.getText().toString(),
                         email.getText().toString(), domicilio.getText().toString());
                 persona.setImagen(R.drawable.contact);
 
+                JSONObject p_json = new JSONObject();
+
                 try {
-                    p_json.put("id", persona.getId());
                     p_json.put("imagen",persona.getImagen());
                     p_json.put("nombres",persona.getNombres());
                     p_json.put("apellidos",persona.getApellidos());
@@ -164,23 +167,27 @@ public class AgregarFragment extends Fragment {
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-                                Toast.makeText(getContext(), response.toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
                                 ManejadorInputs.limpiarCampos(inputs);
                                 idNum++;
                                 id.setEnabled(true);
                                 id.setText(idNum.toString());
                                 id.setEnabled(false);
                                 nombres.requestFocus();
+
+                                MainActivity.getRequest();
                                 Toast.makeText(getContext(), "CONTACTO GUARDADO", Toast.LENGTH_SHORT).show();
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                                System.out.println(error.getMessage());
+                                System.out.println(p_json);
+                                System.out.println("ERROR AQUI => " + error.toString());
                             }
                         });
-
+                System.out.println("ESTO ES *********"+ post_request.toString());
                 MainActivity.requestQueue.add(post_request);
             }
         });

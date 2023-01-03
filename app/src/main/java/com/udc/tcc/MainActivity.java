@@ -12,6 +12,7 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -40,6 +41,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     public static RequestQueue requestQueue;
+    public static Context context;
 
     Intent agregarActivityIntent, mostrarActivityIntent, mostrarActualizarActivityIntent
             , mostrarEliminarActivityIntent;
@@ -58,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        context = MainActivity.this;
         //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         homeFragment = new HomeFragment();
@@ -71,6 +74,13 @@ public class MainActivity extends AppCompatActivity {
 
         //API REQUESTS WITH VOLLEY
         requestQueue = Volley.newRequestQueue(this);
+        getRequest();
+
+        createNotificationChannel();
+        createNotification();
+    }
+
+    public static void getRequest(){
         String api_request = "http://144.22.204.157:8080/api/Contacto/all";
         JsonArrayRequest get_request = new JsonArrayRequest(Request.Method.GET,
                 api_request,
@@ -91,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
                                 persona.setDomicilio(p_json.getString("domicilio"));
 
                                 contactos.add(persona);
+
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -100,13 +111,11 @@ public class MainActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(MainActivity.this, "ERROR EN GET "+error, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "ERROR EN GET "+error, Toast.LENGTH_SHORT).show();
                     }
                 });
 
         requestQueue.add(get_request);
-        createNotificationChannel();
-        createNotification();
     }
 
     public boolean onCreateOptionsMenu(Menu menu){

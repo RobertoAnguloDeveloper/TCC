@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static void getRequest(){
+        contactos = new ArrayList<>();
         String api_request = "http://192.168.56.1:8080/api/Contacto/all";
         JsonArrayRequest get_request = new JsonArrayRequest(Request.Method.GET,
                 api_request,
@@ -90,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(JSONArray response) {
                         try {
                             for (int i = 0; i < response.length(); i++) {
+
                                 Persona persona = new Persona();
                                 JSONObject p_json = new JSONObject(response.get(i).toString());
                                 persona.setId(p_json.getInt("id"));

@@ -12,11 +12,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.material.textfield.TextInputEditText;
 import com.udc.tcc.MainActivity;
 import com.udc.tcc.R;
+import com.udc.tcc.controller.ManejadorInputs;
 import com.udc.tcc.model.Persona;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -138,6 +147,41 @@ public class EditarFragment extends Fragment {
                 persona.setImagen(MainActivity.contactos.get(index).getImagen());
 
                 MainActivity.contactos.set(index, persona);
+
+                JSONObject p_json = new JSONObject();
+
+                try {
+                    p_json.put("id", persona.getId());
+                    p_json.put("imagen",persona.getImagen());
+                    p_json.put("nombres",persona.getNombres());
+                    p_json.put("apellidos",persona.getApellidos());
+                    p_json.put("telefono",persona.getTelefono());
+                    p_json.put("email",persona.getEmail());
+                    p_json.put("domicilio",persona.getDomicilio());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                String api_request = "http://192.168.56.1:8080/api/Contacto/update";
+                JsonObjectRequest put_request = new JsonObjectRequest(Request.Method.PUT, api_request, p_json,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                MainActivity.getRequest();
+                                Toast.makeText(view.getContext(), "CONTACTO EDITADO", Toast.LENGTH_SHORT).show();
+                                MainActivity.transaction = MainActivity.fragmentManager.beginTransaction();
+                                MainActivity.transaction.replace(R.id.fragmentFrame, contactosFragment).commit();
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(view.getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                MainActivity.requestQueue.add(put_request);
+
                 ContactosFragment.adapter.notifyDataSetChanged();
                 MainActivity.fragmentManager.beginTransaction().replace(R.id.fragmentFrame, contactosFragment).commit();
             }

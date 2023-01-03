@@ -6,13 +6,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.udc.tcc.MainActivity;
 import com.udc.tcc.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class ModalFragment extends DialogFragment {
     @Nullable
@@ -40,6 +49,33 @@ public class ModalFragment extends DialogFragment {
                 }
 
                 MainActivity.contactos.remove(index);
+
+                String api_request = "http://192.168.56.1:8080/api/Contacto/"+idBuscar;
+                JSONObject test = null;
+                try {
+                    test = new JSONObject("{}");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                StringRequest delete_request = new StringRequest(Request.Method.DELETE, api_request,
+                        new Response.Listener<String>()
+                        {
+                            @Override
+                            public void onResponse(String response) {
+                                Toast.makeText(MainActivity.context, "CONTACTO ELIMINADO", Toast.LENGTH_SHORT).show();
+                            }
+                        },
+                        new Response.ErrorListener()
+                        {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                error.printStackTrace();
+                            }
+                        }
+                );
+
+                MainActivity.requestQueue.add(delete_request);
+
                 ContactosFragment.adapter.notifyDataSetChanged();
                 dismiss();
             }

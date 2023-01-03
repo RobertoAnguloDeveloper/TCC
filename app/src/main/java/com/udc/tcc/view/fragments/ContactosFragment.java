@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.udc.tcc.MainActivity;
@@ -73,14 +74,8 @@ public class ContactosFragment extends Fragment {
         listView = view.findViewById(R.id.listaContactos);
 
         adapter = new CustomAdapter(getContext());
+
         listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-            }
-        });
 
         return view;
     }

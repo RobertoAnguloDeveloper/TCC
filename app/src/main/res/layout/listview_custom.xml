@@ -1,74 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="20dp">
-
-    <ImageView
-        android:id="@+id/iconImage"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_weight="20"
-        android:padding="5dp"
-        android:layout_marginTop="10dp"
-        tools:srcCompat="@tools:sample/avatars" />
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="10dp">
+        android:padding="20dp">
 
-        <TextView
-            android:id="@+id/nombreCompleto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:paddingStart="10dp"
-            android:textStyle="bold"
-            android:text="TextView" />
+        <ImageView
+            android:id="@+id/iconImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:padding="5dp"
+            android:layout_gravity="center_vertical"
+            tools:srcCompat="@tools:sample/avatars" />
 
-        <TextView
-            android:id="@+id/numeroTel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:textStyle="bold"
-            android:paddingStart="10dp"
-            android:text="TextView" />
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="5dp">
+            android:orientation="vertical"
+            >
 
-            <Button
-                android:id="@+id/btnLlamar"
+            <TextView
+                android:id="@+id/nombreCompleto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:backgroundTint="@color/green"
-                android:text="@string/btnLlamar" />
+                android:gravity="start"
+                android:paddingStart="10dp"
+                android:textStyle="bold"
+                android:text="TextView" />
 
-            <Button
-                android:id="@+id/btnEditar"
+            <TextView
+                android:id="@+id/numeroTel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:backgroundTint="@color/blue"
-                android:text="@string/btnEditar" />
+                android:gravity="start"
+                android:textStyle="bold"
+                android:paddingStart="10dp"
+                android:text="TextView" />
 
-            <Button
-                android:id="@+id/btnEliminar"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/btnEliminar" />
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+
+
+                <ImageView
+                    android:id="@+id/btnLlamar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/phone" />
+
+                <ImageView
+                    android:id="@+id/btnEditar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="80dp"
+                    app:srcCompat="@drawable/edit" />
+
+
+                <ImageView
+                    android:id="@+id/btnEliminar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="40dp"
+                    app:srcCompat="@drawable/delete" />
+
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
-
-</LinearLayout>
+</ScrollView>

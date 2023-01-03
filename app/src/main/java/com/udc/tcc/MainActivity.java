@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Notification;
@@ -18,10 +19,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.udc.tcc.model.Persona;
-import com.udc.tcc.view.MostrarActualizarActivity;
-import com.udc.tcc.view.MostrarEliminarActivity;
-import com.udc.tcc.view.MostrarListaActivity;
 import com.udc.tcc.view.fragments.AgregarFragment;
+import com.udc.tcc.view.fragments.ContactosFragment;
 import com.udc.tcc.view.fragments.HomeFragment;
 
 import java.util.ArrayList;
@@ -31,9 +30,11 @@ public class MainActivity extends AppCompatActivity {
     Intent agregarActivityIntent, mostrarActivityIntent, mostrarActualizarActivityIntent
             , mostrarEliminarActivityIntent;
 
-    FragmentTransaction transaction;
-    Fragment homeFragment, agregarFragment;
+    public static FragmentTransaction transaction;
+    public static FragmentManager fragmentManager;
+    Fragment homeFragment, agregarFragment, contactosFragment;
     public static List<Persona> contactos;
+    public static Persona contacto;
 
     private PendingIntent pendingIntent;
     private final static String CHANNEL_ID = "NOTIFICACION";
@@ -44,15 +45,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mostrarActivityIntent = new Intent(this, MostrarListaActivity.class);
-        mostrarActualizarActivityIntent = new Intent(this, MostrarActualizarActivity.class);
-        mostrarEliminarActivityIntent = new Intent(this, MostrarEliminarActivity.class);
-
         homeFragment = new HomeFragment();
         agregarFragment = new AgregarFragment();
+        contactosFragment = new ContactosFragment();
+        fragmentManager = getSupportFragmentManager();
+
         getSupportFragmentManager().beginTransaction().add(R.id.fragmentFrame, homeFragment).commit();
 
         contactos = new ArrayList<>();
+        contacto = new Persona();
 
         createNotificationChannel();
         createNotification();
@@ -70,14 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 transaction.replace(R.id.fragmentFrame, agregarFragment).commit();
                 break;
             case R.id.menuItem2:
-                //Toast.makeText(this, "MenuItem2", Toast.LENGTH_SHORT).show();
-                startActivity(mostrarActivityIntent);
-                break;
-            case R.id.menuItem3:
-                startActivity(mostrarActualizarActivityIntent);
-                break;
-            case R.id.menuItem4:
-                startActivity(mostrarEliminarActivityIntent);
+                transaction.replace(R.id.fragmentFrame, contactosFragment).commit();
                 break;
             case R.id.menuItemSalir:
                 finish();

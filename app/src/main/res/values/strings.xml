@@ -5,8 +5,8 @@
     <string name="udc_logo">UDC Logo</string>
     <string name="appTitle">APP DE CONTACTO</string>
     <string name="menuItem1">Agregar Contacto</string>
-    <string name="menuItem2">Lista de Contactos</string>
-    <string name="menuItem3">Actualizar Contacto</string>
+    <string name="menuItem2">Contactos</string>
+    <string name="menuItem3">Modal</string>
     <string name="menuItem4">Eliminar Contacto</string>
     <string name="Salir">Salir</string>
 
@@ -35,7 +35,11 @@
 
     <!-- activity-eliminar -->
     <string name="btnEliminar">Eliminar</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- modal -->
+    <string name="btnYes">YES</string>
+    <string name="btnNo">NO</string>
+
+
 
 </resources>

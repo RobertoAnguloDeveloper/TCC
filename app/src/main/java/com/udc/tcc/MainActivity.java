@@ -1,6 +1,7 @@
 package com.udc.tcc;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         homeFragment = new HomeFragment();
         agregarFragment = new AgregarFragment();
@@ -51,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
 
         getSupportFragmentManager().beginTransaction().add(R.id.fragmentFrame, homeFragment).commit();
-
         contactos = new ArrayList<>();
         contacto = new Persona();
 

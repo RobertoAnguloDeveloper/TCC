@@ -16,10 +16,12 @@ import com.udc.tcc.model.Persona;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;

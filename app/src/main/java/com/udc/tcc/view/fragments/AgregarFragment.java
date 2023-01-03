@@ -163,7 +163,7 @@ public class AgregarFragment extends Fragment {
                     e.printStackTrace();
                 }
 
-                String api_request = "http://192.168.56.1:8080/api/Contacto/save";
+                String api_request = "http://144.22.204.157:8080/api/Contacto/save";
                 JsonObjectRequest post_request = new JsonObjectRequest(Request.Method.POST, api_request, p_json,
                         new Response.Listener<JSONObject>() {
                             @Override

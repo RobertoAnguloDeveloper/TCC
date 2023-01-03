@@ -162,7 +162,7 @@ public class EditarFragment extends Fragment {
                     e.printStackTrace();
                 }
 
-                String api_request = "http://192.168.56.1:8080/api/Contacto/update";
+                String api_request = "http://144.22.204.157:8080/api/Contacto/update";
                 JsonObjectRequest put_request = new JsonObjectRequest(Request.Method.PUT, api_request, p_json,
                         new Response.Listener<JSONObject>() {
                             @Override

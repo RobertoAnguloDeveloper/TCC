@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static void getRequest(){
         contactos = new ArrayList<>();
-        String api_request = "http://192.168.56.1:8080/api/Contacto/all";
+        String api_request = "http://144.22.204.157:8080/api/Contacto/all";
         JsonArrayRequest get_request = new JsonArrayRequest(Request.Method.GET,
                 api_request,
                 null,

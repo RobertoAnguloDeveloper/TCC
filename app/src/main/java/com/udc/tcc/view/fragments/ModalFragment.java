@@ -50,7 +50,7 @@ public class ModalFragment extends DialogFragment {
 
                 MainActivity.contactos.remove(index);
 
-                String api_request = "http://192.168.56.1:8080/api/Contacto/"+idBuscar;
+                String api_request = "http://144.22.204.157:8080/api/Contacto/"+idBuscar;
                 JSONObject test = null;
                 try {
                     test = new JSONObject("{}");

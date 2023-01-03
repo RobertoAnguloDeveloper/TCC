@@ -37,6 +37,7 @@ import android.view.ViewGroup;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONStringer;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -162,16 +163,11 @@ public class AgregarFragment extends Fragment {
                     e.printStackTrace();
                 }
 
-                String api_request = "http://144.22.204.157:8080/api/Contacto/save";
+                String api_request = "http://192.168.56.1:8080/api/Contacto/save";
                 JsonObjectRequest post_request = new JsonObjectRequest(Request.Method.POST, api_request, p_json,
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
                                 ManejadorInputs.limpiarCampos(inputs);
                                 idNum++;
                                 id.setEnabled(true);
@@ -181,13 +177,15 @@ public class AgregarFragment extends Fragment {
 
                                 MainActivity.getRequest();
                                 Toast.makeText(getContext(), "CONTACTO GUARDADO", Toast.LENGTH_SHORT).show();
-                                //Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
-                                System.out.println(error.getMessage());
-                                System.out.println(p_json);
-                                System.out.println("ERROR AQUI => " + error.toString());
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
                             }
                         });
-                System.out.println("ESTO ES *********"+ post_request.toString());
+
                 MainActivity.requestQueue.add(post_request);
             }
         });

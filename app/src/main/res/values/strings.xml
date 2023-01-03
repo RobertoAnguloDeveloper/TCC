@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">TCC</string>
     <string name="cipa_name">RVLR SOFT</string>
-    <string name="cipa_info">ROBERTO ANGULO VINCENT ROLONG LUIFER VILLA RUBEN HERNANDEZ MURIEL DIAZ</string>
+    <string name="cipa_info1">ROBERTO ANGULO</string>
+    <string name="cipa_info2">VINCENT ROLONG</string>
+    <string name="cipa_info3">LUIFER VILLA</string>
+    <string name="cipa_info4">RUBEN HERNANDEZ</string>
+    <string name="cipa_info5">MURIEL DIAZ</string>
     <string name="udc_logo">UDC Logo</string>
     <string name="appTitle">APP DE CONTACTO</string>
     <string name="menuItem1">Agregar Contacto</string>

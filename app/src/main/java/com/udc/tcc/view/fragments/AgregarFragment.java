@@ -8,6 +8,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.material.textfield.TextInputEditText;
 import com.udc.tcc.MainActivity;
 import com.udc.tcc.R;
@@ -25,6 +30,10 @@ import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -131,21 +140,48 @@ public class AgregarFragment extends Fragment {
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                JSONObject p_json = new JSONObject();
+
                 Persona persona = new Persona(Integer.valueOf(id.getText().toString()), nombres.getText().toString(),
                         apellidos.getText().toString(), telefono.getText().toString(),
                         email.getText().toString(), domicilio.getText().toString());
-
                 persona.setImagen(R.drawable.contact);
 
-                MainActivity.contactos.add(persona);
+                try {
+                    p_json.put("id", persona.getId());
+                    p_json.put("imagen",persona.getImagen());
+                    p_json.put("nombres",persona.getNombres());
+                    p_json.put("apellidos",persona.getApellidos());
+                    p_json.put("telefono",persona.getTelefono());
+                    p_json.put("email",persona.getEmail());
+                    p_json.put("domicilio",persona.getDomicilio());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
-                ManejadorInputs.limpiarCampos(inputs);
-                idNum++;
-                id.setEnabled(true);
-                id.setText(idNum.toString());
-                id.setEnabled(false);
-                nombres.requestFocus();
-                Toast.makeText(getContext(), "CONTACTO GUARDADO", Toast.LENGTH_SHORT).show();
+                String api_request = "http://144.22.204.157:8080/api/Contacto/save";
+                JsonObjectRequest post_request = new JsonObjectRequest(Request.Method.POST, api_request, p_json,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                Toast.makeText(getContext(), response.toString(), Toast.LENGTH_SHORT).show();
+                                ManejadorInputs.limpiarCampos(inputs);
+                                idNum++;
+                                id.setEnabled(true);
+                                id.setText(idNum.toString());
+                                id.setEnabled(false);
+                                nombres.requestFocus();
+                                Toast.makeText(getContext(), "CONTACTO GUARDADO", Toast.LENGTH_SHORT).show();
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                MainActivity.requestQueue.add(post_request);
             }
         });
 

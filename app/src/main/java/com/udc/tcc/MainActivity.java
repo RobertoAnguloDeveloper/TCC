@@ -18,16 +18,29 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.udc.tcc.model.Persona;
 import com.udc.tcc.view.fragments.AgregarFragment;
 import com.udc.tcc.view.fragments.ContactosFragment;
 import com.udc.tcc.view.fragments.HomeFragment;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    public static RequestQueue requestQueue;
+
     Intent agregarActivityIntent, mostrarActivityIntent, mostrarActualizarActivityIntent
             , mostrarEliminarActivityIntent;
 
@@ -56,6 +69,42 @@ public class MainActivity extends AppCompatActivity {
         contactos = new ArrayList<>();
         contacto = new Persona();
 
+        //API REQUESTS WITH VOLLEY
+        requestQueue = Volley.newRequestQueue(this);
+        String api_request = "http://144.22.204.157:8080/api/Contacto/all";
+        JsonArrayRequest get_request = new JsonArrayRequest(Request.Method.GET,
+                api_request,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            for (int i = 0; i < response.length(); i++) {
+                                Persona persona = new Persona();
+                                JSONObject p_json = new JSONObject(response.get(i).toString());
+                                persona.setId(p_json.getInt("id"));
+                                persona.setImagen(p_json.getInt("imagen"));
+                                persona.setNombres(p_json.getString("nombres"));
+                                persona.setApellidos(p_json.getString("apellidos"));
+                                persona.setTelefono(p_json.getString("telefono"));
+                                persona.setEmail(p_json.getString("email"));
+                                persona.setDomicilio(p_json.getString("domicilio"));
+
+                                contactos.add(persona);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(MainActivity.this, "ERROR EN GET "+error, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        requestQueue.add(get_request);
         createNotificationChannel();
         createNotification();
     }

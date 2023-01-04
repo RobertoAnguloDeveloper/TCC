@@ -167,4 +167,18 @@ public class MainActivity extends AppCompatActivity {
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
         notificationManagerCompat.notify(NOTIFICACION_ID, builder.build());
     }
+
+    @Override
+    public void onBackPressed() {
+        // Obtiene el administrador de fragmentos
+
+        // Si hay algún fragmento en el back stack, volver a ese fragmento
+        if (fragmentManager.getBackStackEntryCount() > 0) {
+            fragmentManager.popBackStack();
+        }
+        // De lo contrario, carga el fragmento predeterminado
+        else {
+            fragmentManager.beginTransaction().replace(R.id.fragmentFrame, contactosFragment).commit();
+        }
+    }
 }

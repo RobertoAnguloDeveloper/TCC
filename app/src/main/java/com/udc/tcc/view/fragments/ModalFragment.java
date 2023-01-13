@@ -51,12 +51,7 @@ public class ModalFragment extends DialogFragment {
                 MainActivity.contactos.remove(index);
 
                 String api_request = "http://144.22.204.157:8080/api/Contacto/"+idBuscar;
-                JSONObject test = null;
-                try {
-                    test = new JSONObject("{}");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+
                 StringRequest delete_request = new StringRequest(Request.Method.DELETE, api_request,
                         new Response.Listener<String>()
                         {

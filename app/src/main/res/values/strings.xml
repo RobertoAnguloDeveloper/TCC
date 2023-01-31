@@ -41,8 +41,8 @@
     <string name="btnEliminar">Eliminar</string>
 
     <!-- modal -->
-    <string name="btnYes">YES</string>
-    <string name="btnNo">NO</string>
+    <string name="btnYes">Aceptar</string>
+    <string name="btnNo">Cancelar</string>
 
 
 
